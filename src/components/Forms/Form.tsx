@@ -1,5 +1,9 @@
+"use client";
+
 import { ReactElement, ReactNode } from "react";
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
+
+
 
 type FormConfig = {
     defaultValues?: Record<string, any>
