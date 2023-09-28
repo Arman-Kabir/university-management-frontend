@@ -24,12 +24,19 @@ const FormInput = ({ name, type, size, value, id, placeholder, validation, label
                 control={control}
                 name={name}
                 render={({ field }) => (
-                    <Input
-                        type={type}
-                        size={size}
-                        placeholder={placeholder}
-                        {...field}
-                        value={value ? value : field.value}></Input>
+                    type === "password" ?
+                        <Input.Password
+                            type={type}
+                            size={size}
+                            placeholder={placeholder}
+                            {...field}
+                            value={value ? value : field.value}></Input.Password> :
+                        <Input
+                            type={type}
+                            size={size}
+                            placeholder={placeholder}
+                            {...field}
+                            value={value ? value : field.value}></Input>
                 )}
             />
         </>
