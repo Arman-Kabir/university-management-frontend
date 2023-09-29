@@ -12,13 +12,17 @@ export const getUserInfo = () => {
     if (authToken) {
         const decodedData = decodedToken(authToken);
         return decodedData;
-    }else{
+    } else {
         return ""
     }
 }
 
-export const isLoggedIn=()=>{
+export const isLoggedIn = () => {
     const authToken = getFromLocalStorage(authKey);
-    
+
     return !!authToken
+}
+
+export const removeUserInfo = (key:string) => {
+    return localStorage.removeItem(key);
 }
