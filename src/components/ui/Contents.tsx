@@ -2,18 +2,17 @@
 
 import React from "react";
 import { Layout } from "antd";
-import UMBreadCrumb from "./UMBreadCrumb";
 import Header from "./Header";
 const { Content } = Layout;
 
 const Contents = ({ children }: { children: React.ReactNode }) => {
 
-    const base = "admin";
+    // const base = "admin";
     return (
         <Content style={{ minHeight: "100vh", color: "black" }}>
 
             <Header></Header>
-            <UMBreadCrumb items={[
+            {/* <UMBreadCrumb items={[
                 {
                     label:`${base}`,
                     link:`/${base}`,
@@ -22,7 +21,7 @@ const Contents = ({ children }: { children: React.ReactNode }) => {
                     label:`student`,
                     link:`/${base}/student`,
                 }
-            ]}></UMBreadCrumb>
+            ]}></UMBreadCrumb> */}
             {children}
         </Content>
     )
