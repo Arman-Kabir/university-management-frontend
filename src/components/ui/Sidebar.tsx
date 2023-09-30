@@ -5,11 +5,14 @@ const { Header, Content, Footer, Sider } = Layout;
 
 import sidebarItems from "@/constants/sidebarItems";
 import { USER_ROLE } from "@/constants/role";
+import { getUserInfo } from "@/services/auth.service";
 
 const Sidebar = () => {
     const [collapsed, setCollapsed] = useState(false);
 
-    const role = USER_ROLE.ADMIN;
+    // const role = USER_ROLE.ADMIN;
+    const { role } = getUserInfo() as any;
+    console.log(role);
 
     return (
         <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}
@@ -25,7 +28,7 @@ const Sidebar = () => {
         >
 
             <div style={{ color: "white", fontSize: "2rem", textAlign: "center", fontWeight: "bold", marginBottom: "1rem" }}>
-                PH-University
+                UMS
             </div>
             <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={sidebarItems(role)} />
         </Sider>
