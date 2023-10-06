@@ -33,6 +33,8 @@ const FormSelectField = ({ options, name, size, value, placeholder, label, defau
                         size={size}
                         options={options}
                         value={value}
+                        style={{ width: "100%" }}
+                        placeholder={placeholder}
                     />
                 )}
             />
