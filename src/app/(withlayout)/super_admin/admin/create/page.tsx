@@ -2,7 +2,9 @@
 
 import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
+import FormSelectField from "@/components/Forms/FormSelectField";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb"
+import { genderOptions } from "@/constants/global";
 import { Button, Col, Row } from "antd"
 
 const CreateAdminPage = () => {
@@ -62,6 +64,12 @@ const CreateAdminPage = () => {
                                  marginBottom: "10px"
                             }}>
                                 <FormInput type="password" name="password" size="large" label="Password"></FormInput>
+                            </Col>
+
+                            <Col className="gutter-row" span={8} style={{
+                                 marginBottom: "10px"
+                            }}>
+                                <FormSelectField size="large" name="admin.gender" options={genderOptions}></FormSelectField>
                             </Col>
                         </Row>
                     </div>
