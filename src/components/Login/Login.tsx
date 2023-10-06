@@ -57,7 +57,7 @@ const LoginPage = () => {
           fontWeight: "bold"
         }}>First Login your account</h1>
         <div>
-          <Form SubmitHandler={onSubmit} >
+          <Form submitHandler={onSubmit} >
             <div>
               <FormInput name='id' type='text' size='large' label="User Id"></FormInput>
             </div>
