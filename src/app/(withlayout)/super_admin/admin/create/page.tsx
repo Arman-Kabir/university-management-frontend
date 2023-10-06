@@ -3,9 +3,10 @@
 import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
 import FormSelectField from "@/components/Forms/FormSelectField";
+import FormTextArea from "@/components/Forms/FormTextArea";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb"
 import UploadImage from "@/components/ui/UploadImage";
-import { departmentOptions, genderOptions } from "@/constants/global";
+import { bGroupOptions, departmentOptions, genderOptions } from "@/constants/global";
 import { Button, Col, Row } from "antd"
 
 const CreateAdminPage = () => {
@@ -127,13 +128,33 @@ const CreateAdminPage = () => {
                             <Col className="gutter-row" span={8} style={{
                                 marginBottom: "10px"
                             }}>
-                                <FormSelectField size="large" name="admin.gender" options={genderOptions} label="Gender" placeholder="Select"></FormSelectField>
+                                <FormSelectField size="large" name="admin.bloodGroup" options={bGroupOptions} label="Blood Group" placeholder="Select"></FormSelectField>
                             </Col>
 
                             <Col className="gutter-row" span={8} style={{
                                 marginBottom: "10px"
                             }}>
-                                <FormSelectField size="large" name="admin.managementDepartment" options={departmentOptions} label="Department" placeholder="Select"></FormSelectField>
+                                <FormInput type="text" name="admin.designation" size="large" label="Designation">
+
+                                </FormInput>
+                            </Col>
+
+                           
+
+
+                            <Col className="gutter-row" span={12} style={{
+                                margin: "10px 0"
+                            }}>
+                                <FormTextArea  name="admin.presentAddress" label="Present Address" rows={4} >
+
+                                </FormTextArea>
+                            </Col>
+
+                            <Col className="gutter-row" span={12} style={{
+                                margin: "10px 0"
+                            }}>
+                                <FormTextArea  name="admin.permanentAddress" label="Permanent Address" rows={4} >
+                                </FormTextArea>
                             </Col>
 
 

@@ -27,3 +27,24 @@ export const departmentOptions=[
         value:"department management"
     },
 ]
+
+export const bGroupOptions=[
+    {
+        label:"O+",
+        value:"o+"
+    },
+    {
+        label:"O-",
+        value:"o-"
+    },
+    {
+        label:"B+",
+        value:"b+"
+    },
+    {
+        label:"B-",
+        value:"b-"
+    }
+  
+   
+]
