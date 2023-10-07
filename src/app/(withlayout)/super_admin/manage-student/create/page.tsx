@@ -27,11 +27,20 @@ const CreateStudentPage = () => {
         }
     ];
 
+    const handleStudentSubmit = async (data: any) => {
+        try {
+            console.log(data);
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
 
     return (
         <div>
             <h1>Create Student</h1>
-            <StepperForm steps={steps}>
+            <StepperForm
+             submitHandler={(value) => handleStudentSubmit(value)} steps={steps}>
 
             </StepperForm>
         </div>
