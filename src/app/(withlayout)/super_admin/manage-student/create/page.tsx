@@ -1,4 +1,7 @@
 import StepperForm from "@/components/StepperForm/StepperForm"
+import GuardianInfo from "@/components/StudentForms/GuardianInfo";
+import LocalGuardianInfo from "@/components/StudentForms/LocalGuardianInfo";
+import StudentBasicInfo from "@/components/StudentForms/StudentBasicInfo";
 import StudentInfo from "@/components/StudentForms/StudentInfo";
 
 const CreateStudentPage = () => {
@@ -10,15 +13,15 @@ const CreateStudentPage = () => {
         },
         {
             title: 'Basic Information',
-            content: <StudentInfo></StudentInfo>,
+            content: <StudentBasicInfo></StudentBasicInfo>,
         },
         {
             title: 'Guardian Information',
-            content: <StudentInfo></StudentInfo>,
+            content: <GuardianInfo></GuardianInfo>,
         },
         {
             title: 'Local Guardian Information',
-            content: <StudentInfo></StudentInfo>,
+            content: <LocalGuardianInfo></LocalGuardianInfo>,
         }
     ];
 
