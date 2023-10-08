@@ -4,27 +4,29 @@ import ActionBar from '@/components/ui/ActionBar'
 import UMBreadCrumb from '@/components/ui/UMBreadCrumb'
 import UMTable from '@/components/ui/UMTable'
 import { useDepartmentsQuery } from '@/redux/api/departmentApi';
+import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
 import { Button } from 'antd'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+// import { UserOutlined } from '@ant-design/icons';
 
 const ManageDepartmentPage = () => {
 
-  const query:Record <string,any> = {};
+  const query: Record<string, any> = {};
 
-  const [size,setSize] = useState<number>(10);
-  const [page,setPage] = useState<number>(1);
-  const [sortBy,setSortBy] = useState<string>("");
-  const [sortOrder,setSortOrder] = useState<string>("");
+  const [size, setSize] = useState<number>(10);
+  const [page, setPage] = useState<number>(1);
+  const [sortBy, setSortBy] = useState<string>("");
+  const [sortOrder, setSortOrder] = useState<string>("");
 
   query["limit"] = size;
   query["page"] = page;
   query["sortBy"] = sortBy;
   query["sortOrder"] = sortOrder;
 
-  const {data:any,isLoading} = useDepartmentsQuery({...query});
+  const { data, isLoading } = useDepartmentsQuery({ ...query });
 
-  
+
   // const {departments,meta} = data;
 
   const departments = data?.departments;
@@ -37,30 +39,31 @@ const ManageDepartmentPage = () => {
     },
     {
       title: 'CreatedAt',
-      dataIndex: 'createdAt',    
+      dataIndex: 'createdAt',
       sorter: true,
     },
     {
       title: 'Action',
       render: function (data: any) {
-        return <Button onClick={() => console.log(data)} type="primary" danger>x</Button>
+        return (
+          <>
+            <Button onClick={() => console.log(data)} type="primary">
+              <EyeOutlined />
+            </Button>
+            <Button style={{
+              margin: "0px 5px"
+            }} onClick={() => console.log(data)} type="primary">
+              <EditOutlined />
+            </Button>
+            <Button onClick={() => console.log(data)} type="primary" danger>
+              <DeleteOutlined />
+            </Button>
+          </>
+
+        )
       }
     }
   ];
-
-  // const tableData = [
-  //   {
-  //     key: '1',
-  //     name: 'Tanmoy Brown',
-  //     age: 32
-  //   },
-  //   {
-  //     key: '2',
-  //     name: 'Jim Green',
-  //     age: 42
-  //   }
-  // ];
-
 
   const onPaginationChange = (page: number, pageSize: number) => {
     console.log("Page:", page, "pageSize:", pageSize);
@@ -72,7 +75,7 @@ const ManageDepartmentPage = () => {
     const { order, field } = sorter;
     // console.log(order, field);
     setSortBy(field as string);
-    setSortOrder(order==="ascend" ? "asc" : "desc");
+    setSortOrder(order === "ascend" ? "asc" : "desc");
   };
 
   return (
@@ -101,9 +104,9 @@ const ManageDepartmentPage = () => {
         totalPages={meta?.total}
         showSizeChanger={true}
         onPaginationChange={onPaginationChange}
-        onTableChange={onTableChange} 
+        onTableChange={onTableChange}
         showPagination={true}
-        />
+      />
     </div>
   )
 }

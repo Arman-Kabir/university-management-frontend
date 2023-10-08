@@ -24,7 +24,9 @@ const CreateDepartmentPage = () => {
       console.error(err.message);
       message.error(err.message);
     }
-  }
+  };
+
+  const base = "super_admin";
 
   return (
     <div>
