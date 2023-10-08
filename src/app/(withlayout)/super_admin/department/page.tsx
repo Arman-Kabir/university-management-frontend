@@ -3,11 +3,26 @@
 import ActionBar from '@/components/ui/ActionBar'
 import UMBreadCrumb from '@/components/ui/UMBreadCrumb'
 import UMTable from '@/components/ui/UMTable'
+import { useDepartmentsQuery } from '@/redux/api/departmentApi';
 import { Button } from 'antd'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 
-const departmentPage = () => {
+const ManageDepartmentPage = () => {
+
+  const query:Record <string,any> = {};
+
+  const [size,setSize] = useState<number>(10);
+  const [page,setPage] = useState<number>(1);
+
+  query["limit"] = size;
+  query["page"] = page;
+
+
+
+
+  const {data,isLoading} = useDepartmentsQuery({...query});
+  const {departments,meta} = data;
 
   const columns = [
     {
@@ -72,7 +87,7 @@ const departmentPage = () => {
       </ActionBar>
 
       <UMTable
-        loading={false}
+        loading={isLoading}
         columns={columns}
         dataSource={tableData}
         pageSize={5}
@@ -86,4 +101,4 @@ const departmentPage = () => {
   )
 }
 
-export default departmentPage
+export default ManageDepartmentPage;
