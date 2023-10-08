@@ -8,14 +8,14 @@ export const departmentApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
 
         departments: build.query({
-            query: (arg:Record <string,any>) => ({
+            query: (arg: Record<string, any>) => ({
                 url: DEPARTMENT_URL,
                 method: "GET",
-                params:arg
+                params: arg
             }),
-            transformResponse:(response:IDepartment,meta:IMeta)=>{
+            transformResponse: (response: IDepartment, meta: IMeta) => {
                 return {
-                    departments:response,
+                    departments: response,
                     meta
                 }
             },
@@ -30,7 +30,26 @@ export const departmentApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: [tagTypes.department]
         }),
-    }),
-})
 
-export const { useDepartmentsQuery ,useAddDepartmentMutation } = departmentApi;
+        // get single department by id
+        department: build.query({
+            query: (id) => ({
+                url: `${DEPARTMENT_URL}/${id}`,
+                method: "GET",
+            }),
+            providesTags: [tagTypes.department],
+        }),
+
+        //update single department by id
+        updateDepartment: build.mutation({
+            query: (data) => ({
+                url: `${DEPARTMENT_URL}/${data.id}`,
+                method: "PATCH",
+                data: data.body,
+            }),
+            invalidatesTags: [tagTypes.department]
+        }),
+    }),
+});
+
+export const { useDepartmentsQuery, useAddDepartmentMutation } = departmentApi;

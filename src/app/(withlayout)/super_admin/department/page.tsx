@@ -9,6 +9,7 @@ import { DeleteOutlined, EditOutlined, EyeOutlined, ReloadOutlined } from '@ant-
 import { Button, Input } from 'antd'
 import Link from 'next/link'
 import React, { useState } from 'react';
+import dayjs from 'dayjs';
 // import { UserOutlined } from '@ant-design/icons';
 
 const ManageDepartmentPage = () => {
@@ -29,10 +30,10 @@ const ManageDepartmentPage = () => {
 
   const debouncedTerm = useDebounced({
     searchQuery: searchTerm,
-    delay:600,
+    delay: 600,
   });
 
-  if(!! debouncedTerm){
+  if (!!debouncedTerm) {
     query["searchTerm"] = debouncedTerm;
   }
 
@@ -52,6 +53,9 @@ const ManageDepartmentPage = () => {
     {
       title: 'CreatedAt',
       dataIndex: 'createdAt',
+      render: function (data: any) {
+        return data && dayjs(data).format("MMM D,YYYY hh:mm A");
+      },
       sorter: true,
     },
     {
@@ -59,14 +63,16 @@ const ManageDepartmentPage = () => {
       render: function (data: any) {
         return (
           <>
-            <Button onClick={() => console.log(data)} type="primary">
+            {/* <Button onClick={() => console.log(data)} type="primary">
               <EyeOutlined />
-            </Button>
-            <Button style={{
-              margin: "0px 5px"
-            }} onClick={() => console.log(data)} type="primary">
-              <EditOutlined />
-            </Button>
+            </Button> */}
+            <Link href={`/super_admin/department/edit/${data?.id}`}>
+              <Button style={{
+                margin: "0px 5px"
+              }} onClick={() => console.log(data)} type="primary">
+                <EditOutlined />
+              </Button>
+            </Link>
             <Button onClick={() => console.log(data)} type="primary" danger>
               <DeleteOutlined />
             </Button>
