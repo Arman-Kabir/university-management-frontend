@@ -4,6 +4,7 @@ import ActionBar from '@/components/ui/ActionBar'
 import UMBreadCrumb from '@/components/ui/UMBreadCrumb'
 import UMTable from '@/components/ui/UMTable'
 import { useDepartmentsQuery } from '@/redux/api/departmentApi';
+import { useDebounced } from '@/redux/hooks';
 import { DeleteOutlined, EditOutlined, EyeOutlined, ReloadOutlined } from '@ant-design/icons';
 import { Button, Input } from 'antd'
 import Link from 'next/link'
@@ -14,8 +15,8 @@ const ManageDepartmentPage = () => {
 
   const query: Record<string, any> = {};
 
-  const [size, setSize] = useState<number>(10);
-  const [page, setPage] = useState<number>(1);
+  const [size, setSize] = useState<number>(1);
+  const [page, setPage] = useState<number>(2);
   const [sortBy, setSortBy] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -24,11 +25,20 @@ const ManageDepartmentPage = () => {
   query["page"] = page;
   query["sortBy"] = sortBy;
   query["sortOrder"] = sortOrder;
-  query["searchTerm"] = searchTerm;
+  // query["searchTerm"] = searchTerm;
+
+  const debouncedTerm = useDebounced({
+    searchQuery: searchTerm,
+    delay:600,
+  });
+
+  if(!! debouncedTerm){
+    query["searchTerm"] = debouncedTerm;
+  }
+
+
 
   const { data, isLoading } = useDepartmentsQuery({ ...query });
-
-
   // const {departments,meta} = data;
 
   const departments = data?.departments;
