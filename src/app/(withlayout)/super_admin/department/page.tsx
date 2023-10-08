@@ -1,5 +1,6 @@
 import ActionBar from '@/components/ui/ActionBar'
 import UMBreadCrumb from '@/components/ui/UMBreadCrumb'
+import UMTable from '@/components/ui/UMTable'
 import { Button } from 'antd'
 import Link from 'next/link'
 import React from 'react'
@@ -22,6 +23,8 @@ const departmentPage = () => {
           <Button type='primary'>Create </Button>
         </Link>
       </ActionBar>
+
+      <UMTable />
     </div>
   )
 }
