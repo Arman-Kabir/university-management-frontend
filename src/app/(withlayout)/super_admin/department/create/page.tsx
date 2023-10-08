@@ -4,17 +4,28 @@ import Form from '@/components/Forms/Form'
 import FormInput from '@/components/Forms/FormInput'
 import ActionBar from '@/components/ui/ActionBar'
 import UMBreadCrumb from '@/components/ui/UMBreadCrumb'
-import { Button, Col, Row } from 'antd'
+import { useAddDepartmentMutation } from '@/redux/api/departmentApi'
+import { Button, Col, Row, message } from 'antd'
 import Link from 'next/link'
 
 const CreateDepartmentPage = () => {
+
+  const [addDepartment] = useAddDepartmentMutation();
+
+
   const onSubmit = async (data: any) => {
+    message.loading("Creating.........")
+    
     try {
       console.log(data);
-    } catch (error: any) {
-      console.error(error.message);
+      await addDepartment(data);
+      message.success("Department added successfully")
+    } catch (err: any) {
+      console.error(err.message);
+      message.error(err.message);
     }
   }
+
   return (
     <div>
       <UMBreadCrumb items={[
@@ -33,7 +44,7 @@ const CreateDepartmentPage = () => {
       <Form submitHandler={onSubmit}>
 
         <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-          <Col  span={8} style={{
+          <Col span={8} style={{
             marginBottom: "10px"
           }}>
             <FormInput type="text" name="title" size="large" label="Title"></FormInput>
