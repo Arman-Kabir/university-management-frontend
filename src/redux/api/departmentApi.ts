@@ -52,4 +52,4 @@ export const departmentApi = baseApi.injectEndpoints({
     }),
 });
 
-export const { useDepartmentsQuery, useAddDepartmentMutation } = departmentApi;
+export const { useDepartmentsQuery, useAddDepartmentMutation,useDepartmentQuery,useUpdateDepartmentMutation, } = departmentApi;

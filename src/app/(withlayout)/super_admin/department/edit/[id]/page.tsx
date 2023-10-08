@@ -4,6 +4,7 @@ import Form from "@/components/Forms/Form";
 import FormInput from "@/components/Forms/FormInput";
 import ActionBar from "@/components/ui/ActionBar";
 import UMBreadCrumb from "@/components/ui/UMBreadCrumb";
+import { useDepartmentQuery } from "@/redux/api/departmentApi";
 import { Button, Col, Row, message } from "antd";
 
 type IDProps = {
@@ -12,17 +13,25 @@ type IDProps = {
 
 const EditDepartmentPage = ({ params }: IDProps) => {
     const { id } = params;
+    const { data, isLoading } = useDepartmentQuery(id);
+    console.log(data);
+
+
     const onSubmit = async (data: any) => {
         message.loading("Updating.........")
 
         try {
-            console.log(data);           
+            console.log(data);
             message.success("Department updated successfully")
         } catch (err: any) {
             console.error(err.message);
             message.error(err.message);
         }
     };
+
+    const defaultValues: any = {
+        title: data?.title || "",
+    }
     // console.log(params.id);
     return (
         <div>
@@ -43,7 +52,7 @@ const EditDepartmentPage = ({ params }: IDProps) => {
 
             <ActionBar title="Update Department "></ActionBar>
 
-            <Form submitHandler={onSubmit}>
+            <Form submitHandler={onSubmit} defaultValues={defaultValues}>
 
                 <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
                     <Col span={8} style={{
