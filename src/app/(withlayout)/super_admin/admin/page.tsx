@@ -10,6 +10,7 @@ import { Button, Input, message } from 'antd'
 import Link from 'next/link'
 import React, { useState } from 'react';
 import dayjs from 'dayjs';
+import { useAdminsQuery } from '@/redux/api/adminApi';
 // import { UserOutlined } from '@ant-design/icons';
 
 const ManageAdminPage = () => {
@@ -38,10 +39,10 @@ const ManageAdminPage = () => {
     query["searchTerm"] = debouncedTerm;
   }
 
-  const { data, isLoading } = useDepartmentsQuery({ ...query });
+  const { data, isLoading } = useAdminsQuery({ ...query });
   // const {departments,meta} = data;
 
-  const departments = data?.departments;
+  const admins = data?.admins;
   const meta = data?.meta;
 
   const deleteHandler = async (id:string) => {
@@ -166,7 +167,7 @@ const ManageAdminPage = () => {
       <UMTable
         loading={isLoading}
         columns={columns}
-        dataSource={departments}
+        dataSource={admins}
         pageSize={size}
         totalPages={meta?.total}
         showSizeChanger={true}
