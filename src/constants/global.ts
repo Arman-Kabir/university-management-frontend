@@ -28,7 +28,7 @@ export const departmentOptions=[
     },
 ]
 
-export const bGroupOptions=[
+export const bloodGroupOptions=[
     {
         label:"O+",
         value:"O+"
