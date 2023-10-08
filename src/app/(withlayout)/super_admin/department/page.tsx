@@ -4,8 +4,8 @@ import ActionBar from '@/components/ui/ActionBar'
 import UMBreadCrumb from '@/components/ui/UMBreadCrumb'
 import UMTable from '@/components/ui/UMTable'
 import { useDepartmentsQuery } from '@/redux/api/departmentApi';
-import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
-import { Button } from 'antd'
+import { DeleteOutlined, EditOutlined, EyeOutlined, ReloadOutlined } from '@ant-design/icons';
+import { Button, Input } from 'antd'
 import Link from 'next/link'
 import React, { useState } from 'react';
 // import { UserOutlined } from '@ant-design/icons';
@@ -18,11 +18,13 @@ const ManageDepartmentPage = () => {
   const [page, setPage] = useState<number>(1);
   const [sortBy, setSortBy] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   query["limit"] = size;
   query["page"] = page;
   query["sortBy"] = sortBy;
   query["sortOrder"] = sortOrder;
+  query["searchTerm"] = searchTerm;
 
   const { data, isLoading } = useDepartmentsQuery({ ...query });
 
@@ -78,6 +80,14 @@ const ManageDepartmentPage = () => {
     setSortOrder(order === "ascend" ? "asc" : "desc");
   };
 
+  const resetFilters = () => {
+    setSortBy("");
+    setSortOrder("");
+    setSearchTerm("");
+  }
+
+
+
   return (
     <div>
       <UMBreadCrumb
@@ -91,9 +101,22 @@ const ManageDepartmentPage = () => {
 
 
       <ActionBar title="Department List">
+        <Input
+          type='text' size='large'
+          placeholder='Search....' style={{
+            width: '20%'
+          }}
+          onChange={(e) => { setSearchTerm(e.target.value) }}
+        ></Input>
+
         <Link href="/super_admin/department/create">
           <Button type='primary'>Create </Button>
         </Link>
+        {
+          (!!sortBy || !!sortOrder || !!searchTerm) && (<Button onClick={resetFilters} type='primary' style={{ margin: "0px 5px" }}>
+            <ReloadOutlined />
+          </Button>)
+        }
       </ActionBar>
 
       <UMTable
