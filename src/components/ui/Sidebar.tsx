@@ -10,8 +10,8 @@ import { getUserInfo } from "@/services/auth.service";
 const Sidebar = () => {
     const [collapsed, setCollapsed] = useState(false);
 
-    // const role = USER_ROLE.ADMIN;
-    const { role } = getUserInfo() as any;
+    const role = USER_ROLE.ADMIN;
+    // const { role } = getUserInfo() as any;
     console.log(role);
 
     return (
